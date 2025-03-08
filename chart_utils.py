@@ -3,7 +3,7 @@ import pandas as pd
 
 from constants import DEFAULT_ZOOM
 
-def plot_candlestick(data, title, highlight_indices=None):
+def plot_candlestick(data, title, highlight_indices=None, interval="1d"):
     """Plots a candlestick chart with optional highlighting."""
     if data is None or data.empty:
         return None
@@ -81,8 +81,8 @@ def plot_candlestick(data, title, highlight_indices=None):
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
-                    dict(count=60, label="Recent 60", step="day", stepmode="backward"),
-                    dict(count=90, label="Recent 90", step="day", stepmode="backward"),
+                    dict(count=60, label="Recent 60", step=step_check(interval), stepmode="backward"),
+                    dict(count=90, label="Recent 90", step=step_check(interval), stepmode="backward"),
                     dict(step="all", label="All")
                 ]),
                 bgcolor="rgba(50, 50, 50, 0.7)",
@@ -125,3 +125,11 @@ def detect_range_breaks(data):
         rangebreaks.append(dict(bounds=[prev_time, gap_start]))
     
     return rangebreaks
+
+def step_check(interval):
+    if interval == "5m" or interval == "15m" or interval == "30m":
+        return "hour"
+    elif interval == "1h" or interval == "4h" or interval == "1d":
+        return "day"
+    else:
+        return "day"
