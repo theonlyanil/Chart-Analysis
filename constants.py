@@ -4,6 +4,7 @@ SCORE_KEY = "score"
 HISTORY_KEY = "history"
 
 # --- Defaults ---
+APP_NAME = "Chart Analysis"
 DEFAULT_SYMBOL = "AAPL"
 DEFAULT_INTERVAL = "1d"
 DEFAULT_PREDICTION_CANDLES = 25

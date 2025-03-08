@@ -1,12 +1,12 @@
 import streamlit as st
 import random
-from st_paywall import add_auth
+#from st_paywall import add_auth
 
 from constants import *
 from data_handler import get_data
 from chart_utils import plot_candlestick, calculate_trend
 
-add_auth(required=True)
+#add_auth(required=True)
 
 
 # --- Helper Functions ---
@@ -25,7 +25,7 @@ def get_random_symbol(universe=None):
 
 # --- Streamlit App ---
 def main():
-    st.title("Candlestick Chart Predictor")
+    st.title(APP_NAME)
 
     # Initialize essential session state variables
     if "score" not in st.session_state:
