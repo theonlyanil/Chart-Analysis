@@ -1,0 +1,6 @@
+# Streamlit secrets
+.streamlit/secrets.toml
+.streamlit/
+
+# Python generated files and directories
+__pycache__/
