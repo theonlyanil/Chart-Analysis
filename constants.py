@@ -13,6 +13,9 @@ MAX_PREDICTION_CANDLES = 50
 PREDICTION_CANDLES_STEP = 5
 MIN_REQUIRED_DATA_POINTS = 45  # Base requirement before adding prediction candles
 
+# --- Plotly Constants ---
+DEFAULT_ZOOM = 60
+
 
 # -- Stock Universes --
 STOCK_UNIVERSES = {

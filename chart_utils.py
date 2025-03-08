@@ -1,6 +1,8 @@
 import plotly.graph_objects as go
 import pandas as pd
 
+from constants import DEFAULT_ZOOM
+
 def plot_candlestick(data, title, highlight_indices=None):
     """Plots a candlestick chart with optional highlighting."""
     if data is None or data.empty:
@@ -31,12 +33,14 @@ def plot_candlestick(data, title, highlight_indices=None):
         dragmode='zoom',
         hovermode='x unified'
     )
-    
+
+    rangebreaks = detect_range_breaks(data)
     # Configure the x-axis for better trading view
     fig.update_xaxes(
         rangeslider_visible=True,
         rangeslider=dict(visible=True, thickness=0.05),  # Thinner rangeslider
         type='date',
+        rangebreaks=rangebreaks
     )
     
     # Configure y-axis for dynamic adjustment
@@ -59,7 +63,7 @@ def plot_candlestick(data, title, highlight_indices=None):
         )
     
     # Default zoom into recent 60 candles
-    zoom_candles = 60
+    zoom_candles = DEFAULT_ZOOM
     if len(data) > zoom_candles:
         visible_data = data.iloc[-zoom_candles:]
         fig.update_xaxes(range=[visible_data.index[0], visible_data.index[-1]])
@@ -101,3 +105,23 @@ def calculate_trend(data):
         return "up"
     else:
         return "down"
+
+
+# Chatgpt wrote the below function
+def detect_range_breaks(data):
+    """Detects missing time intervals and returns rangebreaks for Plotly."""
+    if len(data) < 2:
+        return []
+    
+    time_diffs = data.index.to_series().diff().dropna()
+    median_interval = time_diffs.median()  # Detect expected interval
+    
+    # Find large gaps (greater than 1.5x expected interval)
+    large_gaps = time_diffs[time_diffs > median_interval * 1.5]
+    
+    rangebreaks = []
+    for gap_start in large_gaps.index:
+        prev_time = gap_start - time_diffs[gap_start]
+        rangebreaks.append(dict(bounds=[prev_time, gap_start]))
+    
+    return rangebreaks
