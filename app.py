@@ -167,7 +167,7 @@ def main():
             if not st.session_state.predicted:
                 # Initial view - show all data except the last prediction candles
                 initial_data = full_data.iloc[:split_index].copy()
-                fig = plot_candlestick(initial_data, f"{current_symbol} - Initial Data", interval=interval)
+                fig = plot_candlestick(initial_data, interval=interval)
                 st.plotly_chart(fig, use_container_width=True)
                 
                 # Prediction form

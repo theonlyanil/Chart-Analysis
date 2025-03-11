@@ -3,7 +3,7 @@ import pandas as pd
 
 from constants import DEFAULT_ZOOM
 
-def plot_candlestick(data, title, highlight_indices=None, interval="1d"):
+def plot_candlestick(data, highlight_indices=None, interval="1d"):
     """Plots a candlestick chart with optional highlighting."""
     if data is None or data.empty:
         return None
@@ -21,7 +21,7 @@ def plot_candlestick(data, title, highlight_indices=None, interval="1d"):
 
     # Basic layout
     fig.update_layout(
-        title=title,
+        #title=title,
         yaxis_title='Price',
         xaxis_title='Date/Time',
         template="plotly_dark",
@@ -31,7 +31,26 @@ def plot_candlestick(data, title, highlight_indices=None, interval="1d"):
         plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
         dragmode='zoom',
-        hovermode='x unified'
+        hovermode='x unified',
+        # Add crosshair configuration for both axes
+        xaxis=dict(
+            showspikes=True,
+            spikemode='across',
+            spikesnap='cursor',
+            spikecolor='gray',
+            spikethickness=1,
+            showline=True,
+            showgrid=True
+        ),
+        yaxis=dict(
+            showspikes=True,
+            spikemode='across',
+            spikesnap='cursor',
+            spikecolor='gray',
+            spikethickness=1,
+            showline=True,
+            showgrid=True
+        )
     )
 
     rangebreaks = detect_range_breaks(data)
@@ -87,7 +106,15 @@ def plot_candlestick(data, title, highlight_indices=None, interval="1d"):
                 ]),
                 bgcolor="rgba(50, 50, 50, 0.7)",
                 font=dict(color="white")
-            )
+            ),
+            # Preserve the crosshair settings
+            showspikes=True,
+            spikemode='across',
+            spikesnap='cursor',
+            spikecolor='gray',
+            spikethickness=1,
+            showline=True,
+            showgrid=True
         )
     )
 
