@@ -184,7 +184,7 @@ def main():
             
             else:
                 # Display full view with highlighted prediction zone
-                fig = plot_candlestick(full_data, f"{current_symbol} - Full Data", highlight_indices=split_index)
+                fig = plot_candlestick(full_data, highlight_indices=split_index)
                 st.plotly_chart(fig, use_container_width=True)
 
                 # Calculate and show results

@@ -100,8 +100,8 @@ def plot_candlestick(data, highlight_indices=None, interval="1d"):
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
-                    dict(count=60, label="Recent 60", step=step_check(interval), stepmode="backward"),
-                    dict(count=90, label="Recent 90", step=step_check(interval), stepmode="backward"),
+                    dict(count=100, label="Recent 100", step=step_check(interval), stepmode="backward"),
+                    dict(count=200, label="Recent 200", step=step_check(interval), stepmode="backward"),
                     dict(step="all", label="All")
                 ]),
                 bgcolor="rgba(50, 50, 50, 0.7)",

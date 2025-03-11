@@ -1,5 +1,5 @@
 # Constants for the application
-INTERVALS = ["5m", "15m", "30m", "60m", "1h", "1d"]
+INTERVALS = ["5m", "15m", "30m", "1h", "1d"]
 SCORE_KEY = "score"
 HISTORY_KEY = "history"
 
@@ -14,7 +14,7 @@ PREDICTION_CANDLES_STEP = 5
 MIN_REQUIRED_DATA_POINTS = 45  # Base requirement before adding prediction candles
 
 # --- Plotly Constants ---
-DEFAULT_ZOOM = 60
+DEFAULT_ZOOM = 100
 
 
 # -- Stock Universes --

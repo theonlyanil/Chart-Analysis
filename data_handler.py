@@ -18,12 +18,12 @@ def get_random_period(interval):
         # Daily data - end date randomly between 30-730 days ago
         days_back = random.randint(60, 1200)
         end_date = current_date - pd.Timedelta(days=days_back)
-        start_date = end_date - pd.Timedelta(days=200)
+        start_date = end_date - pd.Timedelta(days=400)
     else:
         # Weekly/Monthly data - end date randomly between 90-730 days ago
         days_back = random.randint(90, 4000)
         end_date = current_date - pd.Timedelta(days=days_back)
-        start_date = end_date - pd.Timedelta(days=365)
+        start_date = end_date - pd.Timedelta(days=1000)
     
     # Ensure end_date doesn't exceed current date
     end_date = min(end_date, current_date)
